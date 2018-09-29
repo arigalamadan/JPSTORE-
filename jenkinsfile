@@ -1,0 +1,21 @@
+node {
+    stage ("checkout"){
+   // get some git code 
+   git clone 'https://github.com/arigalamadan/JPSTORE-.git'
+   //Get some maven tool
+   //** M3 maven tool must be configured 
+   //** in the global configuration
+    }
+env.JAVA_HOME="{/usr/bin/java}"
+env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+sh 'java -version'
+
+env.M2_HOME="{/usr/share/maven}"
+env.PATH="${env.M2_HOME}/bin:${env.PATH}"
+sh 'mvn --version'
+
+stage ("compile"){
+    sh 'mvn compile'
+    stage("package")
+}
+}
